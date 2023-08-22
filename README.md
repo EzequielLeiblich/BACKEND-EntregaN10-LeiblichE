@@ -1,44 +1,34 @@
-# Desafio N°7 Refactor a nuestro login
+# Desafio N°10 Mocking y Manejo de Errores
 
 ## LEIBLICH Ezequiel Gaston
 
 ## Comisión 43345 - Programación Backend
 
+-----------------------------------------
 
-Reestructura de nuestro servidor
+Mocking y Manejo de Errores
+En este repositorio, hemos implementado un módulo de mocking y un manejador de errores en nuestro servidor actual para mejorar la robustez y la eficiencia del sistema.
 
-Este repositorio contiene el trabajo terminado de la reestructura del servidor, basado en un modelo de capas para una mejor organización y separación de responsabilidades.
+Mocking de Productos
+He desarrollado un módulo de Mocking que permite que nuestro servidor genere automáticamente 100 productos con el mismo formato que se obtendría mediante una petición a la base de datos MongoDB. Esta funcionalidad está disponible a través del endpoint /mockingproducts.
 
-Descripción:
+Manejo de Errores
+Para mejorar la experiencia del usuario y garantizar una comunicación clara en el servidor, he creado un manejador de errores personalizado. He diseñado un diccionario que abarca los errores más comunes que pueden surgir durante la creación de productos, la adición al carrito, y otras operaciones importantes.
 
-El proyecto ha sido reorganizado en diferentes capas, siguiendo las mejores prácticas de desarrollo:
+Instrucciones:
 
-1. Capa de Routing: Encargada de manejar las rutas de la aplicación y la comunicación con el cliente. Aquí se definen los endpoints y se gestionan las peticiones HTTP.
+1 - Clona este repositorio en tu máquina local.
 
-2. Capa de Controlador: Responsable de la lógica de negocio y operaciones. Aquí se realizan las operaciones necesarias para completar las tareas solicitadas, y se comunica con la capa de Persistencia.
+2 - Configura las variables de entorno en un archivo .env si es necesario.
 
-3. Capa de DAO (Data Access Object): Encargada de la conexión y gestión de datos en la base de datos o sistema de persistencia. Aquí se accede a los datos y se realizan operaciones CRUD (Crear, Leer, Actualizar, Eliminar) necesarias.
+3 - Instala las dependencias requeridas utilizando npm install.
 
-4. Vistas: Las vistas están correctamente separadas y organizadas. Se han implementado modelos de capas para asegurar una correcta delegación de responsabilidades.
+4 - Ejecuta el servidor con npm start o el comando correspondiente para tu configuración.
 
-Configuración de Variables de Entorno
+Uso del Mocking de Productos
+Puedes acceder al módulo de Mocking de Productos a través del endpoint /mockingproducts. Al acceder a este endpoint, el servidor generará y entregará automáticamente 100 productos en el formato que se obtendría de una petición a MongoDB.
 
-Todas las partes importantes y datos comprometidos se han movido a un archivo .env para mantenerlos seguros y proteger información sensible. Además, se ha implementado un archivo config.js para leer las variables de entorno y configurar el proyecto adecuadamente.
+Manejo de Errores
+He implementado un manejador de errores personalizado que te proporcionará mensajes claros y específicos para los errores más comunes que puedan surgir al realizar operaciones como crear productos o agregar elementos al carrito.
 
-Instrucciones
-
-Para ejecutar el proyecto, sigue los siguientes pasos:
-
-1. Clona este repositorio en tu máquina local.
-
-2. Crea un archivo .env y coloca en él las variables de entorno necesarias, como credenciales de la base de datos o claves de acceso.
-
-3. Configura el archivo config.js para leer las variables de entorno y establecer la configuración del proyecto.
-
-4. Instala las dependencias necesarias ejecutando npm install.
-
-5. Ejecuta el servidor con npm start o el comando que corresponda según tu configuración.
-
-¡Listo! El proyecto se ejecutará con la nueva estructura de capas y las variables de entorno configuradas de manera segura.
-
-¡Gracias por revisar este proyecto reestructurado!
+¡Gracias por revisar este trabajo mejorado el servidor, con mocking y manejo de errores integrados! Si tienes preguntas o necesitas ayuda, no dudes en contactame.
