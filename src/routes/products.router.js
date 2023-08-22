@@ -1,0 +1,35 @@
+import { Router } from "express";
+import ProductController from "../controllers/productsController.js";
+import passport from "passport";
+
+import { rolesMiddlewareAdmin } from "./middlewares/roles.middleware.js";
+
+const productsRouter = Router();
+let productController = new ProductController();
+
+productsRouter.post('/', passport.authenticate('jwt', {session: false}), rolesMiddlewareAdmin, async (req, res) => {
+  const result = await productController.createProductController(req, res);
+  res.status(result.statusCode).send(result);
+});
+
+productsRouter.get('/:pid', async (req, res) => {
+  const result = await productController.getProductByIDController(req, res);
+  res.status(result.statusCode).send(result);
+});
+
+productsRouter.get('/', async (req, res) => {
+  const result = await productController.getAllProductsController(req, res);
+  res.status(result.statusCode).send(result);
+});
+
+productsRouter.delete('/:pid', passport.authenticate('jwt', {session: false}), rolesMiddlewareAdmin, async (req, res) => {
+  const result = await productController.deleteProductController(req, res);
+  res.status(result.statusCode).send(result);
+});
+
+productsRouter.put('/:pid', passport.authenticate('jwt', {session: false}), rolesMiddlewareAdmin, async (req, res) => {
+  const result = await productController.updatedProductController(req, res);
+  res.status(result.statusCode).send(result);
+});
+
+export default productsRouter;
