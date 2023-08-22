@@ -16,6 +16,7 @@ import userRouter from "./routes/session.router.js"
 import msmRouter from "./routes/message.router.js"
 import ticketRouter from "./routes/ticket.router.js";
 import mockRouter from './routes/mock.router.js'
+import errorMiddleware from './routes/errors/error.middleware.js';
 
 // CONTROLLERS
 
@@ -45,6 +46,7 @@ const connection = mongoose.connect(
 app.use(express.json());
 app.use(urlencoded({ extended: true }));
 app.use(express.static(__dirname + "/public"));
+app.use(errorMiddleware);
 app.engine("handlebars", handlebars.engine());
 app.set("views", __dirname + "/views");
 app.set("view engine", "handlebars");
@@ -127,4 +129,4 @@ app.use("/api/carts", cartRouter);
 app.use("/api/sessions", userRouter);
 app.use("/api/products", productsRouter);
 app.use('/api/tickets', ticketRouter);
-app.use('/mockingproducts', mockRouter);
+app.use('/mockProducts', mockRouter);

@@ -1,12 +1,18 @@
 import { Router } from "express";
-import TicketController from '../controllers/ticketsController.js'
+import { generateProduct } from "../utils/mock.utils.js";
 
 const mockRouter = Router();
-let ticketController = new TicketController();
 
-ticketRouter.get("/", async (req, res) => {
-    const result = await ticketController.getTicketsByIdController(req, res);
-    res.status(result.statusCode).send(result);
+mockRouter.get("/", async (req, res) => {
+    let mockedProducts = [];
+    for (let i = 0; i < 100; i++) {
+        mockedProducts.push(generateProduct());
+    };
+    res.send({
+        status: 'success',
+        message: 'Productos generados',
+        payload: mockedProducts
+    })
 });
 
 export default mockRouter;

@@ -5,6 +5,10 @@ import passport from "passport";
 import { rolesMiddlewareUser } from "./middlewares/roles.middleware.js";
 import { verificarPertenenciaCarrito } from "./middlewares/carts.middleware.js";
 
+import  ErrorEnums from './errors/error.enums.js'
+import { generateQuantityErrorInfo }from "./errors/error.info.js";
+import CustomError from "./errors/customError.class.js";
+
 const cartRouter = Router();
 let cartController = new CartController();
 
@@ -24,10 +28,20 @@ cartRouter.get('/', async (req, res) => {
   res.status(result.statusCode).send(result);
 });
 
-cartRouter.post('/:cid/products/:pid/quantity/:quantity', passport.authenticate('jwt', {session: false}), rolesMiddlewareUser,verificarPertenenciaCarrito, async (req, res) => {
+cartRouter.post('/:cid/products/:pid/quantity/:quantity' ,/*passport.authenticate('jwt', {session: false}), rolesMiddlewareUser, verificarPertenenciaCarrito, */async (req, res) => {
+  const quantity = req.params.quantity;
+      if (isNaN(quantity) || quantity <= 0) {
+      CustomError.createError({
+          name: "Add product in cart error",
+          cause: generateQuantityErrorInfo(quantity),
+          message: "Quantity must be a valid number",
+          code: ErrorEnums.QUANTITY_INVALID_ERROR
+      });
+  }
   const result = await cartController.addProductInCartController(req, res);
   res.status(result.statusCode).send(result);
 });
+
 
 cartRouter.post('/:cid/purchase', async (req, res) =>{
   const result = await cartController.purchaseProductsInCartController(req, res);
