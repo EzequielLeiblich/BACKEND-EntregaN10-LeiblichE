@@ -1,5 +1,4 @@
 import CartService from "../services/carts.service.js";
-import mongoose from 'mongoose';
 
 export default class CartController {
     constructor() {
